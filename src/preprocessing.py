@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 
 
 def basic_cleaning(df: pd.DataFrame) -> pd.DataFrame:
@@ -88,7 +87,7 @@ def preprocess(data_dict: dict, horizon_days: int = 7,
                addresses_col: str = 'daily_active_addresses',
                z_threshold: float = 3.0, price_spike_pct: float = 10.0,
                verbose: bool = True):
-    """ 
+    """
     preprocessing + create a target (delta_min, delta_max).
     Filter abnormal days (by price or by daily_active_addresses).
     - all_tokens_data[token_name] = DataFrame (after preprocessing and target)
@@ -110,10 +109,7 @@ def preprocess(data_dict: dict, horizon_days: int = 7,
         if verbose:
             print(f"Processing {token_name} ...")
 
-        # 1) Полная предобработка + target
-        # Сначала базовая чистка
         df_cleaned = basic_cleaning(df_token)
-        # Далее создаем delta_min / delta_max
         df_prepared = make_target_local_extremes(
             df_cleaned,
             price_col=price_col,
